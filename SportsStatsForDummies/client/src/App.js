@@ -15,12 +15,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"> 
+        <DropdownMenu />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload. <br />
           Why wont it appear in aside more testing
         </p>
-        <Button />
+        <SigninButton />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -36,21 +37,21 @@ function App() {
 function DropdownMenu(){
   return(
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
+      <Dropdown.Toggle className = "Dropdown-menu" id="dropdown-basic">
+        Sports
       </Dropdown.Toggle>
-
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">NBA</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">ATP Tour</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
 }
-function Button(){
+function SigninButton(){
   return(
-    <button>I'm a button </button>
+    <button className = "Button-signin">
+      Sign In 
+      </button>
   );
 }
 export default App;
