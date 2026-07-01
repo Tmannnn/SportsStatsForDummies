@@ -3,8 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  height: 20vmin;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,7 +13,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: black;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -30,19 +29,56 @@
 }
 
 .Dropdown-menu{
-  background-color: #282c34 !important;
-  border-color: #282c34 !important;
+  background-color: #2d2d2d !important;
+  border-color: transparent !important;
+  border: 1px solid white;
+  border-radius: 20px;
   position: fixed;
-  top: 20px;
+  top: 90px;
   left: 20px;
 }
 
 .Button-signin{
-  background-color: #282c34 !important;
-  border-color: #282c34 !important;
+  background-color: #282c34;
+  border-color: white;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  font-size: calc(8px + 1vmin);
+  color: white;
+  width: 80px;
+  height: 40px;
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 35px;
+}
+.Button-homepageLogo{
+  background-color: transparent;
+  border-color: transparent;
+  position: fixed;
+  height: 25px;
+  width: auto;
+  top: 20px;
+  left: 20px;
+}
+.logo-homepage{
+  width: 50px;
+  height: auto;
+  position: fixed;
+  top: 20px;
+  left: 35px;
+}
+.searchBar{
+  font-size: calc(8px + 1vmin);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  border-color: white;
 }
 @keyframes App-logo-spin {
   from {
