@@ -16,12 +16,14 @@ function App() {
     <div className="App">
       <header className="App-header"> 
         <DropdownMenu />
+        <SigninButton />
+        <HomepageLogoButton />
+        <SearchBar />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload. <br />
           Why wont it appear in aside more testing
         </p>
-        <SigninButton />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -52,6 +54,22 @@ function SigninButton(){
     <button className = "Button-signin">
       Sign In 
       </button>
+  );
+}
+function HomepageLogoButton(){
+  return(
+    <a href = "/" className = "Button-homepageLogo">
+      <img src = "logo192.png" alt = "Logo of website that sends them back to the homepage" className = "logo-homepage"></img>
+    </a>
+  );
+}
+function SearchBar(){
+  return(
+    <input
+      type="text"
+      placeholder="  Search Teams, Players, and Stats"
+      className="searchBar"
+    />
   );
 }
 export default App;
