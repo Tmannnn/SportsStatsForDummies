@@ -2,6 +2,7 @@
   text-align: center;
   min-height: 100vh;
   background-color: #282c34;
+  color: WHITE;
 }
 
 .App-logo {
@@ -21,7 +22,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
   position: relative;
 }
 .App-body{
@@ -31,7 +31,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
   position: relative;
 }
 
@@ -51,11 +50,11 @@
 
 .Button-signin{
   background-color: #4E5767;
+  color: WHITE;
   border-color: white;
   border: transparent;
   border-radius: 20px;
   font-size: calc(8px + 1vmin);
-  color: white;
   width: 80px;
   height: 40px;
   position: fixed;
@@ -81,7 +80,6 @@
 .searchBar{
   font-size: calc(8px + 1vmin);
   padding: 0 15px;
-  color: white;
   position: fixed;
   top: 20px;
   left: 50%;
@@ -92,24 +90,88 @@
   border: transparent;
   border-radius: 20px;
 }
+
 .body-sportLeaderboard{
   font-size: calc(8px + 1vmin);
-  top:75px;
+  top:80px;
   left:150px;
   position:fixed;
   width: 350px;
-  height: 700px;
+  height: 720px;
   background-color: #4E5767;
   border: transparent;
   border-radius: 20px;
 }
 .body-sportLeaderboardButton{
   font-size: calc(9px + 1vmin);
-  color: WHITE;
   background-color: #4E5767;
   border-radius: 20px;
   border: 1px solid #6a7487;
   text-align: center;
+  color:WHITE;
+}
+.body-PointsLeaderboard{
+  font-size: calc(8px + 1vmin);
+  background-color: #4E5767;
+  border: transparent;
+  border-radius: 20px;
+  top: 250px;
+  left: 520px;
+  position: fixed;
+  width: 415px;
+  height: 265px;
+}
+.body-ReboundsLeaderboard{
+  font-size: calc(8px + 1vmin);
+  background-color: #4E5767;
+  border: transparent;
+  border-radius: 20px;
+  top: 250px;
+  left: 955px;
+  position: fixed;
+  width: 415px;
+  height: 265px;
+}
+.body-AssistsLeaderboard{
+  font-size: calc(8px + 1vmin);
+  background-color: #4E5767;
+  border: transparent;
+  border-radius: 20px;
+  top: 535px;
+  left: 520px;
+  position: fixed;
+  width: 415px;
+  height: 265px;
+}
+.body-DefenseLeaderboard{
+  font-size: calc(8px + 1vmin);
+  background-color: #4E5767;
+  border: transparent;
+  border-radius: 20px;
+  top: 535px;
+  left: 955px;
+  position: fixed;
+  width: 415px;
+  height: 265px;
+}
+.body-games{
+  font-size: calc(8px + 1vmin);
+  top: 80px;
+  left: 520px;
+  position: fixed;
+  width: 850px;
+  height: 150px;
+  background-color: #4E5767;
+  border: transparent;
+  border-radius: 20px;
+}
+.body-gamesButton{
+  font-size: calc(8px + 1vmin);
+  background-color: #4E5767;
+  border-radius: 20px;
+  border: 1px solid #6a7487;
+  text-align: center;
+  color: WHITE;
 }
 @keyframes App-logo-spin {
   from {

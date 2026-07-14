@@ -23,6 +23,11 @@ function App() {
       </header>
       <div className="App-body">
         <LeaderboardBox />
+        <Games />
+        <PointsLeaderboard />
+        <ReboundsLeaderboard />
+        <AssistsLeaderboard />
+        <DefenseLeaderboard />
       </div>
     </div>
   );
@@ -64,19 +69,80 @@ function SearchBar(){
   );
 }
 function LeaderboardBox(){
+  // add a button on the botton or dropdown that switches between conferences and maybe the divisions
+  const [selectedLeague, setSelectedLeague] = useState("NBA");
+  const leaderboardData = {
+    NBA: [
+      { rank: 1, name: "Thunder" },
+      { rank: 2, name: "Nuggets" },
+      { rank: 3, name: "Celtics" }
+    ],
+    ATP: [
+      { rank: 1, name: "Jannik Sinner" },
+      { rank: 2, name: "Carlos Alcaraz" },
+      { rank: 3, name: "Alexander Zverev" }
+    ]
+  }
+  return(
+    <div className = "body-sportLeaderboard">
+      <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-sportLeaderboardButton" style={{ width: `${selectedLeague.length + 4}ch` }}>
+        <option value = "NBA">NBA</option>
+        <option value = "ATP">ATP</option>
+      </select>
+      {leaderboardData[selectedLeague].map((item) => (
+          <p key={item.rank}>
+            {item.rank}. {item.name}
+          </p>
+        ))}
+    </div>
+  );
+}
+function Games(){
   const [selectedLeague, setSelectedLeague] = useState("NBA");
   const leaderboardData = {
     NBA: ["1. Thunder", "2. Nuggets", "3. Celtics"],
     ATP: ["1. Jannik Sinner", "2. Carlos Alcaraz", "3. Alexander Zverev"]
   }
   return(
-    <div className = "body-sportLeaderboard">
-      <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-sportLeaderboardButton" style={{ width: `${selectedLeague.length + 4}ch` }}
-      >
+    <div className = "body-games">
+      <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-gamesButton" style = {{width: `${selectedLeague.length + 4} ch`}}>
         <option value = "NBA">NBA</option>
         <option value = "ATP">ATP</option>
       </select>
+      {leaderboardData[selectedLeague].map((team, index) => (
+        <p key={index}>
+          {index + 1}. {team}
+        </p>
+      ))}
     </div>
+  );
+}
+function PointsLeaderboard(){
+  return(
+    <div className = "body-PointsLeaderboard">
+      Points Leaderboard
+    </div>
+  );
+}
+function ReboundsLeaderboard(){
+  return(
+    <div className = "body-ReboundsLeaderboard">
+      Rebounds Leaderboard
+    </div>
+  );
+}
+function AssistsLeaderboard(){
+  return(
+    <div className = "body-AssistsLeaderboard">
+      Assists Leaderboard
+    </div>
+  );
+}function DefenseLeaderboard(){
+  return(
+    <div className = "body-DefenseLeaderboard">
+      Defensive Leaderboard
+    </div>
+    // add a button or dropdown menu that allows you to switch between steals and defense and maybe more defensive stats
   );
 }
 export default App;
