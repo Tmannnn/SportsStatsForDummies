@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {useState} from 'react';
 
 //data will be the string we send from our server
 const apiCall = () =>{
@@ -19,20 +20,10 @@ function App() {
         <SigninButton />
         <HomepageLogoButton />
         <SearchBar />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. <br />
-          Why wont it appear in aside more testing
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer" 
-        >
-          Learn React
-        </a>
       </header>
+      <div className="App-body">
+        <LeaderboardBox />
+      </div>
     </div>
   );
 }
@@ -67,9 +58,25 @@ function SearchBar(){
   return(
     <input
       type="text"
-      placeholder="  Search Teams, Players, and Stats"
+      placeholder="Search Teams, Players, and Stats"
       className="searchBar"
     />
+  );
+}
+function LeaderboardBox(){
+  const [selectedLeague, setSelectedLeague] = useState("NBA");
+  const leaderboardData = {
+    NBA: ["1. Thunder", "2. Nuggets", "3. Celtics"],
+    ATP: ["1. Jannik Sinner", "2. Carlos Alcaraz", "3. Alexander Zverev"]
+  }
+  return(
+    <div className = "body-sportLeaderboard">
+      <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-sportLeaderboardButton" style={{ width: `${selectedLeague.length + 4}ch` }}
+      >
+        <option value = "NBA">NBA</option>
+        <option value = "ATP">ATP</option>
+      </select>
+    </div>
   );
 }
 export default App;

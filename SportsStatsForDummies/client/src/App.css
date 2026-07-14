@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -13,8 +15,17 @@
 }
 
 .App-header {
-  background-color: black;
-  min-height: 100vh;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: relative;
+}
+.App-body{
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,9 +40,9 @@
 }
 
 .Dropdown-menu{
-  background-color: #2d2d2d !important;
+  background-color: #4E5767 !important;
   border-color: transparent !important;
-  border: 1px solid white;
+  border: 1px solid transparent;
   border-radius: 20px;
   position: fixed;
   top: 90px;
@@ -39,9 +50,9 @@
 }
 
 .Button-signin{
-  background-color: #282c34;
+  background-color: #4E5767;
   border-color: white;
-  border: 1px solid #ffffff;
+  border: transparent;
   border-radius: 20px;
   font-size: calc(8px + 1vmin);
   color: white;
@@ -63,22 +74,42 @@
 .logo-homepage{
   width: 50px;
   height: auto;
-  position: fixed;
+  position: fixed;  
   top: 20px;
   left: 35px;
 }
 .searchBar{
   font-size: calc(8px + 1vmin);
+  padding: 0 15px;
+  color: white;
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 700px;
   height: 40px;
-  background-color: transparent;
-  border: 1px solid #ffffff;
+  background-color: #4E5767;
+  border: transparent;
   border-radius: 20px;
-  border-color: white;
+}
+.body-sportLeaderboard{
+  font-size: calc(8px + 1vmin);
+  top:75px;
+  left:150px;
+  position:fixed;
+  width: 350px;
+  height: 700px;
+  background-color: #4E5767;
+  border: transparent;
+  border-radius: 20px;
+}
+.body-sportLeaderboardButton{
+  font-size: calc(9px + 1vmin);
+  color: WHITE;
+  background-color: #4E5767;
+  border-radius: 20px;
+  border: 1px solid #6a7487;
+  text-align: center;
 }
 @keyframes App-logo-spin {
   from {
