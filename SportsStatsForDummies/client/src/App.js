@@ -22,7 +22,7 @@ function App() {
         <SearchBar />
       </header>
       <div className="App-body">
-        <LeaderboardBox />
+        <NBALeaderboardBox />
         <Games />
         <PointsLeaderboard />
         <ReboundsLeaderboard />
@@ -68,21 +68,28 @@ function SearchBar(){
     />
   );
 }
-function LeaderboardBox(){
+function NBALeaderboardBox(){
   // add a button on the botton or dropdown that switches between conferences and maybe the divisions
   const [selectedLeague, setSelectedLeague] = useState("NBA");
-  const leaderboardData = {
-    NBA: [
-      { rank: 1, name: "Thunder" },
-      { rank: 2, name: "Nuggets" },
-      { rank: 3, name: "Celtics" }
-    ],
-    ATP: [
-      { rank: 1, name: "Jannik Sinner" },
-      { rank: 2, name: "Carlos Alcaraz" },
-      { rank: 3, name: "Alexander Zverev" }
-    ]
-  }
+  const [leaderboardData, sestLeaderboardData] = useState({
+    NBA: [],
+    ATP: []
+  });
+  useEffect(() => {
+    async function getNBALeaderboard(){
+      try{
+        const response = await fetch("http://localhost:8080"); // change this to the corect link when I actually launch it
+        const data = await response.json();
+        sestLeaderboardData({
+          NBA: data,
+          ATP:[]
+        });
+      } catch(error){
+        console.error(error);
+      }
+    }
+    getNBALeaderboard();
+  }, []);
   return(
     <div className = "body-sportLeaderboard">
       <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-sportLeaderboardButton" style={{ width: `${selectedLeague.length + 4}ch` }}>
@@ -97,21 +104,44 @@ function LeaderboardBox(){
     </div>
   );
 }
-function Games(){
+function Games() {
   const [selectedLeague, setSelectedLeague] = useState("NBA");
-  const leaderboardData = {
-    NBA: ["1. Thunder", "2. Nuggets", "3. Celtics"],
-    ATP: ["1. Jannik Sinner", "2. Carlos Alcaraz", "3. Alexander Zverev"]
-  }
-  return(
-    <div className = "body-games">
-      <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-gamesButton" style = {{width: `${selectedLeague.length + 4} ch`}}>
-        <option value = "NBA">NBA</option>
-        <option value = "ATP">ATP</option>
+  const [gameData, setGameData] = useState({
+    NBA: [],
+    ATP: []
+  });
+  useEffect(() => {
+    async function getNBAGames() {
+      try {
+        const response = await fetch("http://localhost:8080/nba-odds");
+        if (!response.ok) {
+          throw new Error("Could not retrieve NBA games");
+        }
+        const data = await response.json();
+        setGameData({
+          NBA: data,
+          ATP: []
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getNBAGames();
+  }, []);
+  return (
+    <div className="body-sportLeaderboard">
+      <select
+        value={selectedLeague}
+        onChange={(e) => setSelectedLeague(e.target.value)}
+        className="body-sportLeaderboardButton"
+        style={{ width: `${selectedLeague.length + 4}ch` }}
+      >
+        <option value="NBA">NBA</option>
+        <option value="ATP">ATP</option>
       </select>
-      {leaderboardData[selectedLeague].map((team, index) => (
-        <p key={index}>
-          {index + 1}. {team}
+      {gameData[selectedLeague].map((game, index) => (
+        <p key={game.id}>
+          {index + 1}. {game.away_team} vs. {game.home_team}
         </p>
       ))}
     </div>
