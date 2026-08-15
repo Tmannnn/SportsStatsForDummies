@@ -141,9 +141,9 @@
   left: 520px;
   position: fixed;
   width: 415px;
-  height: 265px;
+  height: 265px;  
 }
-.body-DefenseLeaderboard{
+.body-HeadtoHead{
   font-size: calc(8px + 1vmin);
   background-color: #4E5767;
   border: transparent;
@@ -154,7 +154,7 @@
   width: 415px;
   height: 265px;
 }
-.body-games{
+.body-games {
   font-size: calc(8px + 1vmin);
   top: 80px;
   left: 520px;
@@ -162,16 +162,54 @@
   width: 850px;
   height: 150px;
   background-color: #4E5767;
-  border: transparent;
   border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 .body-gamesButton{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  top: 150px;
+  height: 40px;
+  padding: 0 15px;
   font-size: calc(8px + 1vmin);
   background-color: #4E5767;
   border-radius: 20px;
   border: 1px solid #6a7487;
   text-align: center;
   color: WHITE;
+}
+.body-gamesTeam {
+  flex: 0 0 220px; /* Fixed width so cards don't shrink */
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #5B6578;
+  border-radius: 15px;
+  color: white;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+.body-gamesTeam:hover {
+  background-color: #697488;
+}
+.body-gamesMatchup {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.body-gamesTime {
+  color: #D8D8D8;
+  font-size: 0.9em;
+  text-align: center;
 }
 @keyframes App-logo-spin {
   from {

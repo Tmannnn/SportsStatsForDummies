@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
 import Dropdown from 'react-bootstrap/Dropdown';
-import {useState} from 'react';
+import { useState, useEffect } from "react";
 
 //data will be the string we send from our server
 const apiCall = () =>{
@@ -27,7 +27,7 @@ function App() {
         <PointsLeaderboard />
         <ReboundsLeaderboard />
         <AssistsLeaderboard />
-        <DefenseLeaderboard />
+        <HeadtoHead />
       </div>
     </div>
   );
@@ -118,6 +118,8 @@ function Games() {
           throw new Error("Could not retrieve NBA games");
         }
         const data = await response.json();
+        console.log(data);
+        console.log(data.length);
         setGameData({
           NBA: data,
           ATP: []
@@ -129,20 +131,34 @@ function Games() {
     getNBAGames();
   }, []);
   return (
-    <div className="body-sportLeaderboard">
+    <div className="body-games">
+      {/* not sure if I want this since ill have a nba page and a atp page*/}
+      {/*
       <select
         value={selectedLeague}
         onChange={(e) => setSelectedLeague(e.target.value)}
-        className="body-sportLeaderboardButton"
+        className="body-gamesButton"
         style={{ width: `${selectedLeague.length + 4}ch` }}
       >
         <option value="NBA">NBA</option>
         <option value="ATP">ATP</option>
       </select>
-      {gameData[selectedLeague].map((game, index) => (
-        <p key={game.id}>
-          {index + 1}. {game.away_team} vs. {game.home_team}
-        </p>
+      */}
+      {gameData[selectedLeague].map((game) => (
+        <div className="body-gamesTeam" key={game.id}>
+          <div className="body-gamesMatchup">
+            {game.away_team} vs. {game.home_team}
+          </div>
+
+          <div className="body-gamesTime">
+          {new Date(game.commence_time).toLocaleString([], {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+          })}
+          </div>
+        </div>
       ))}
     </div>
   );
@@ -167,10 +183,10 @@ function AssistsLeaderboard(){
       Assists Leaderboard
     </div>
   );
-}function DefenseLeaderboard(){
+}function HeadtoHead(){
   return(
-    <div className = "body-DefenseLeaderboard">
-      Defensive Leaderboard
+    <div className = "body-HeadtoHead">
+      Head to Heads
     </div>
     // add a button or dropdown menu that allows you to switch between steals and defense and maybe more defensive stats
   );
