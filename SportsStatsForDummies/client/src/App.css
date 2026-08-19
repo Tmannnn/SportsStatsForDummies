@@ -90,17 +90,53 @@
   border: transparent;
   border-radius: 20px;
 }
-
-.body-sportLeaderboard{
+/* all of these are for the leaderboard*/
+.body-sportLeaderboard {
   font-size: calc(8px + 1vmin);
-  top:80px;
-  left:150px;
-  position:fixed;
+  position: fixed;
+  top: 80px;
+  left: 150px;
   width: 350px;
   height: 720px;
   background-color: #4E5767;
-  border: transparent;
   border-radius: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.body-leaderboardTeam {
+  display: flex;
+  align-items: center;
+  background-color: #5B6578;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+.body-leaderboardTeam:hover {
+  background-color: #697488;
+}
+.body-leaderboardRank {
+  width: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+.body-leaderboardName {
+  flex: 1;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.body-leaderboardRecord {
+  width: 60px;
+  text-align: right;
+  color: #D8D8D8;
+}
+.body-conference h3 {
+  color: white;
+  text-align: center;
+  margin: 15px 0;
+  font-size: calc(10px + 1vmin);
 }
 .body-sportLeaderboardButton{
   font-size: calc(9px + 1vmin);
@@ -110,6 +146,7 @@
   text-align: center;
   color:WHITE;
 }
+
 .body-PointsLeaderboard{
   font-size: calc(8px + 1vmin);
   background-color: #4E5767;

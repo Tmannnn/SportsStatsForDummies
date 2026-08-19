@@ -68,39 +68,90 @@ function SearchBar(){
     />
   );
 }
-function NBALeaderboardBox(){
-  // add a button on the botton or dropdown that switches between conferences and maybe the divisions
+function NBALeaderboardBox() {
   const [selectedLeague, setSelectedLeague] = useState("NBA");
-  const [leaderboardData, sestLeaderboardData] = useState({
+
+  const [leaderboardData, setLeaderboardData] = useState({
     NBA: [],
     ATP: []
   });
+
   useEffect(() => {
-    async function getNBALeaderboard(){
-      try{
-        const response = await fetch("http://localhost:8080"); // change this to the corect link when I actually launch it
+    async function getNBALeaderboard() {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/nba-leaderboard"
+        );
+  
+        console.log("Status:", response.status);
+        console.log("OK:", response.ok);
+  
         const data = await response.json();
-        sestLeaderboardData({
+  
+        console.log("Data:", data);
+  
+        if (!response.ok) {
+          throw new Error("Could not retrieve NBA leaderboard");
+        }
+  
+        setLeaderboardData({
           NBA: data,
-          ATP:[]
+          ATP: []
         });
-      } catch(error){
+  
+      } catch (error) {
         console.error(error);
       }
     }
+  
     getNBALeaderboard();
   }, []);
-  return(
-    <div className = "body-sportLeaderboard">
-      <select value = {selectedLeague} onChange={(e)=>setSelectedLeague(e.target.value)} className = "body-sportLeaderboardButton" style={{ width: `${selectedLeague.length + 4}ch` }}>
-        <option value = "NBA">NBA</option>
-        <option value = "ATP">ATP</option>
-      </select>
-      {leaderboardData[selectedLeague].map((item) => (
-          <p key={item.rank}>
-            {item.rank}. {item.name}
-          </p>
+  const westernConference = leaderboardData.NBA
+    .filter((team) => team.conference === "West")
+    .sort((a, b) => a.rank - b.rank);
+  const easternConference = leaderboardData.NBA
+    .filter((team) => team.conference === "East")
+    .sort((a, b) => a.rank - b.rank);
+  console.log("West:", westernConference);
+  console.log("East:", easternConference);
+  return (
+    <div className="body-sportLeaderboard">
+      <div className="body-conference">
+        <h3 className="body-conferenceTitle">
+          WESTERN CONFERENCE
+        </h3>
+        {westernConference.map((team) => (
+          <div className="body-leaderboardTeam" key={team.team_id}>
+            <div className="body-leaderboardRank">
+              {team.rank}
+            </div>
+            <div className="body-leaderboardName">
+              {team.team_city} {team.team_name}
+            </div>
+            <div className="body-leaderboardRecord">
+              {team.record}
+            </div>
+          </div>
         ))}
+      </div>
+      <div className="body-conference">
+        <h3 className="body-conferenceTitle">
+          EASTERN CONFERENCE
+        </h3>
+        {easternConference.map((team) => (
+          <div className="body-leaderboardTeam" key={team.team_id}>
+            <div className="body-leaderboardRank">
+              {team.rank}
+            </div>
+            <div className="body-leaderboardName">
+              {team.team_city} {team.team_name}
+            </div>
+            <div className="body-leaderboardRecord">
+              {team.record}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -118,8 +169,6 @@ function Games() {
           throw new Error("Could not retrieve NBA games");
         }
         const data = await response.json();
-        console.log(data);
-        console.log(data.length);
         setGameData({
           NBA: data,
           ATP: []
