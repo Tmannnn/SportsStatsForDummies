@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from nba_api.stats.endpoints import leaguestandings
+from nba_api.stats.static import players
 
 app = Flask(__name__)
 
@@ -62,6 +63,15 @@ def nba_standings():
             "error": str(error)
         }), 500
 
-
+@app.route("/nba-player-search/<name>")
+def nba_player_search(name):
+    try:
+        matches = players.find_players_by_full_name(name)
+        return jsonify(matches)
+    except Exception as error:
+        print("PLAYER SEARCH ERROR:", repr(error))
+        return jsonify({
+            "error": "Could not search NBA players"
+        }), 500
 if __name__ == "__main__":
     app.run(port=5001)

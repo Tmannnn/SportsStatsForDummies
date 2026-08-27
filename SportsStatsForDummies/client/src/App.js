@@ -60,12 +60,47 @@ function HomepageLogoButton(){
   );
 }
 function SearchBar(){
+  const [search, setSearch] = useState("");
+  const [playerResults, setPlayerResults] = useState([]);
+  useEffect(() =>{
+    async function searchPlayers(){
+      // doesn't search unless you type a letter in
+      if(search.trim() === ""){
+        setPlayerResults([]);
+        return;
+      }
+      try{
+        const response = await fetch(`http://localhost:8080/nba-player-search/${encodeURIComponent(search)}`);
+        if(!response.ok){
+          throw new Error("Could not search players");
+        }
+        const data = await response.json();
+        setPlayerResults(data);
+      } catch(error){
+        console.error(error);
+      }
+    }
+    searchPlayers();
+  }, [search]);
   return(
-    <input
+    <>
+      <input
       type="text"
       placeholder="Search Teams, Players, and Stats"
       className="searchBar"
-    />
+      value = {search}
+      onChange={(event) => setSearch(event.target.value)}
+      />
+      {playerResults.length>0 && (
+        <div className="searchResults">
+          {playerResults.slice(0,6).map((player) => (
+            <div className="searchResultPlayer" key={player.id}>
+              {player.full_name}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 function NBALeaderboardBox() {
@@ -82,28 +117,18 @@ function NBALeaderboardBox() {
         const response = await fetch(
           "http://localhost:8080/nba-leaderboard"
         );
-  
-        console.log("Status:", response.status);
-        console.log("OK:", response.ok);
-  
         const data = await response.json();
-  
-        console.log("Data:", data);
-  
         if (!response.ok) {
           throw new Error("Could not retrieve NBA leaderboard");
         }
-  
         setLeaderboardData({
           NBA: data,
           ATP: []
         });
-  
       } catch (error) {
         console.error(error);
       }
     }
-  
     getNBALeaderboard();
   }, []);
   const westernConference = leaderboardData.NBA

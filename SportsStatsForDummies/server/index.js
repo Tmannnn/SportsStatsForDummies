@@ -9,60 +9,66 @@ app.use(cors())
 
 // when you run node index.js, it calls to the computer with the 8080, then once the app listens it outputs the console log
 app.listen(8080, () =>{
-    console.log('server listening on port 8080')
-    console.log("ODDSAPI Key:", ODDSApiKey);
-    console.log("BALLISLIFEAPI Key:", BALLDONTLIEApiKey);
+  console.log('server listening on port 8080')
+  console.log("ODDSAPI Key:", ODDSApiKey);
+  console.log("BALLISLIFEAPI Key:", BALLDONTLIEApiKey);
 })
 
 // calling the nbaodds api in order to get the info for these
 app.get("/nba-odds", async (req, res) => {
-    try{
-        //console.log("nbaodds got hit");
-        const url = `https://api.the-odds-api.com/v4/sports/basketball_nba/odds?regions=us&markets=h2h,spreads,totals&oddsFormat=american&apiKey=${ODDSApiKey}`;
-        //console.log("Starting API request");
-
-        const response = await fetch(url, {
-        signal: AbortSignal.timeout(10000)
-        });
-        //console.log("Response received");
-        //console.log("Status:", response.status);
-        //console.log("OK:", response.ok);
-
-        const data = await response.json();
-
-        //console.log("JSON parsed successfully");
-        //console.log("API response:", data);
-        if(!response.ok){
-            return res.status(response.status).json(data);
-        }
-        res.json(data);
+  try{
+    const url = `https://api.the-odds-api.com/v4/sports/basketball_nba/odds?regions=us&markets=h2h,spreads,totals&oddsFormat=american&apiKey=${ODDSApiKey}`;
+    const response = await fetch(url, {
+    signal: AbortSignal.timeout(10000)
+    });
+    const data = await response.json();
+    if(!response.ok){
+      return res.status(response.status).json(data);
     }
-    catch(error){
-        console.error("Error requesting odds: ", error);
-        res.status(500).json({
-            error: "Could not retrieve NBA odds",
-        });
-    }
+    res.json(data);
+  }
+  catch(error){
+    console.error("Error requesting odds: ", error);
+    res.status(500).json({
+      error: "Could not retrieve NBA odds",
+    });
+  }
 });
-// calling this gets in order to get the leaderbaord from balldontlie api
+// calling this gets in order to get the leaderbaord from python Swar api
 app.get("/nba-leaderboard", async (req, res) => {
-    try {
-      const response = await fetch(
-        "http://localhost:5001/nba-standings"
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        return res.status(response.status).json(data);
-      }
-      res.json(data);
-    } catch (error) {
-      console.error(error);
-
-      res.status(500).json({
-        error: "Could not retrieve NBA leaderboard"
-      });
+  try {
+    const response = await fetch(
+      "http://localhost:5001/nba-standings"
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      return res.status(response.status).json(data);
     }
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Could not retrieve NBA leaderboard"
+    });
+  }
   });
+  // gets you a list of all the possible names based on what you have typed
+app.get("/nba-player-search/:name", async (req, res) => {
+  try{
+    const name = req.params.name;
+    const response = await fetch(`http://localhost:5001/nba-player-search/${encodeURIComponent(name)}`);
+    const data = await response.json();
+    if(!response.ok){
+      return res.status(response.status).json(data);
+    }
+    return res.json(data);
+  } catch(error){
+    console.error("Player search error:", error);
+    return res.status(500).json({
+      error: "Could not serach NBA players"
+    });
+  }
+});
 // routing function
 /*
     if someone is making a GET request with the route /, then run this function

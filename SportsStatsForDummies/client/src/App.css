@@ -90,6 +90,26 @@
   border: transparent;
   border-radius: 20px;
 }
+.searchResults {
+  position: fixed;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 730px;
+  background-color: #4E5767;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: 1000;
+}
+.searchResultPlayer {
+  padding: 12px 15px;
+  color: white;
+  cursor: pointer;
+  font-size: calc(8px + 1vmin);
+}
+.searchResultPlayer:hover {
+  background-color: #5B6578;
+}
 /* all of these are for the leaderboard*/
 .body-sportLeaderboard {
   font-size: calc(8px + 1vmin);
